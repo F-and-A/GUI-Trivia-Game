@@ -9,8 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class App extends JFrame {
+    static Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
+
     static JFrame Frame = new JFrame("Trivia Game");
-    static JLabel Label = new JLabel("<html>TRIVIA GAME<html><br>The Game Where The Answers Just Don't Add Up<br>");
+    static JLabel Title = new JLabel("TRIVIA GAME");
+    static JButton Play = new JButton("Play");
+    static JButton Credit = new JButton("Credit");
+
     static JLabel Status = new JLabel();
     static JButton Button1 = new JButton();
     static JButton Button2 = new JButton();
@@ -19,24 +24,39 @@ public class App extends JFrame {
     static int Correct = 0;
     static int QuestionLevel = 0;
     public static void main(String[] args) throws Exception {
-        Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
+
+        Credit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CreditSreen();
+            }
+        });
 
         Frame.setLayout(null);
         Frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         Frame.setSize((int)Size.getWidth(), (int)Size.getHeight());
+        Frame.getContentPane().setBackground(new java.awt.Color(17,95,244));
 
-        Label.setLocation(600, 0);
-        Label.setSize(1000, 500);
-        Label.setFont(new Font("Arial", Font.BOLD, 30));
+        Title.setLocation(635, 195);
+        Title.setSize(650, 100);
+        Title.setFont(new Font("Arial", Font.BOLD, 100));
+        Frame.add(Title);
 
-        JButton Button = new JButton("Play");
-        Button.setLocation(800, 500);
-        Button.setSize(300, 200);
-        Button.setFont(new Font("Arial", Font.BOLD, 30));
-        Button.addActionListener(new ActionListener() {
+        Play.setLocation(710, 490);
+        Play.setSize(500, 100);
+        Play.setFont(new Font("Arial", Font.BOLD, 50));
+        Frame.add(Play);
+
+        Credit.setLocation(710, 690);
+        Credit.setSize(500, 100);
+        Credit.setFont(new Font("Arial", Font.BOLD, 50));
+        Frame.add(Credit);
+
+        Play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Button.setVisible(false);
+                Play.setVisible(false);
+                Credit.setVisible(false);
                 Frame.add(Button1);
                 Frame.add(Button2);
                 Frame.add(Button3);
@@ -62,44 +82,59 @@ public class App extends JFrame {
                 Question();
             }
         });
-
-        Status.setLocation(600, 0);
-        Status.setSize(1000, 500);
-        Status.setFont(new Font("Arial", Font.BOLD, 50));
-
-        Button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Status.setText("Wrong!");
-                Increse(0);
-            }
-        });
         
-        Frame.add(Label);
-        Frame.add(Button);
-        Frame.add(Status);
         Frame.setVisible(true);
+    }
+
+    public static void CreditSreen() {
+
+        Play.setVisible(false);
+        Title.setText("<html>Credits<br>Frank<br>Ashraf<br><html>");
+        Title.setLocation(785, 83);
+        Title.setSize(350, 325);
     }
 
     public static void Question() {
 
-        String[] Questions = {"Qustion 1: Yes or No", "Qustion 2: No or Yes", "Question 3: CHEESSE", "Question 4: FAFAF", "Qustion 5: SADSADA"};
-        String[] Button1Text = {"Yes", "No", "CHEESSE", "FAFAF", "SADSADA"};
-        String[] Button2Text = {"No", "Yes", "CHEESSE", "IDK", "what"};
+        String[] Questions = {"Qustion 1: Yes or No", "Qustion 2: No or Yes", "Question 3: CHEESSE"};
+        String[] Button1Text = {"A: Yes", "A: No", "A: CHEESSE"};
+        String[] Button2Text = {"B: No", "B: Yes", "B: CHEESSE"};
+        String[] Button3Text = {"", "", "CHEESSE"};
+        String[] Button4Text = {"", "", "CHEESSE"};
 
-        System.out.print(QuestionLevel);
+        Title.setLocation(710, 250);
 
-        Label.setText(Questions[QuestionLevel]);
+        if (Button3Text[QuestionLevel] == "")
+            Button3.setVisible(false);
+        else
+            Button3.setVisible(true);
+
+        if (Button4Text[QuestionLevel] == "")
+            Button4.setVisible(false);
+        else
+            Button4.setVisible(true);
+
+        Title.setText(Questions[QuestionLevel]);
 
         Button1.setText(Button1Text[QuestionLevel]);
-        Button1.setLocation(600, 500);
-        Button1.setSize(300, 200);
-        Button1.setFont(new Font("Arial", Font.BOLD, 30));
+        Button1.setLocation(100, 490);
+        Button1.setSize(800, 100);
+        Button1.setFont(new Font("Arial", Font.BOLD, 50));
 
         Button2.setText(Button2Text[QuestionLevel]);
-        Button2.setLocation(1200, 500);
-        Button2.setSize(300, 200);
-        Button2.setFont(new Font("Arial", Font.BOLD, 30));
+        Button2.setLocation(1020, 490);
+        Button2.setSize(800, 100);
+        Button2.setFont(new Font("Arial", Font.BOLD, 50));
+
+        Button3.setText(Button3Text[QuestionLevel]);
+        Button3.setLocation(100, 690);
+        Button3.setSize(800, 100);
+        Button3.setFont(new Font("Arial", Font.BOLD, 50));
+
+        Button4.setText(Button4Text[QuestionLevel]);
+        Button4.setLocation(1020, 690);
+        Button4.setSize(800, 100);
+        Button4.setFont(new Font("Arial", Font.BOLD, 50));
     }
 
     public static void Increse(int Value) {
