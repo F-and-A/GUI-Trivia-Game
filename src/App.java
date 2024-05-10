@@ -1,13 +1,16 @@
+// Imports Java Swing library
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+//Imports Java AWT Library
 import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Extends JFrame, then creates its components
 public class App extends JFrame {
     static Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -25,6 +28,7 @@ public class App extends JFrame {
     static int QuestionLevel = 0;
     public static void main(String[] args) throws Exception {
 
+        //Adds an action listener for drawing the credits. 
         Credit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,26 +36,31 @@ public class App extends JFrame {
             }
         });
 
+        //Sets up the frame and its components
         Frame.setLayout(null);
         Frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         Frame.setSize((int)Size.getWidth(), (int)Size.getHeight());
         Frame.getContentPane().setBackground(new java.awt.Color(17,95,244));
 
+        //Adds a title to the Frame and sets its size, font, and location
         Title.setLocation(635, 195);
         Title.setSize(650, 100);
         Title.setFont(new Font("Arial", Font.BOLD, 100));
         Frame.add(Title);
 
+        //Adds in the play button, sets size, font and location
         Play.setLocation(710, 490);
         Play.setSize(500, 100);
         Play.setFont(new Font("Arial", Font.BOLD, 50));
         Frame.add(Play);
 
+        //Adds a credits button, sets Location, Size, and Font.
         Credit.setLocation(710, 690);
         Credit.setSize(500, 100);
         Credit.setFont(new Font("Arial", Font.BOLD, 50));
         Frame.add(Credit);
 
+        //Action Listener is added to the play button.
         Play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,6 +74,7 @@ public class App extends JFrame {
             }
         });
 
+        //Action Listener is added to Button 1
         Button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +84,7 @@ public class App extends JFrame {
             }
         });
 
+        //Action Listener is added to Button 2
         Button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,9 +94,12 @@ public class App extends JFrame {
             }
         });
         
+        //Frame is set visible
         Frame.setVisible(true);
     }
 
+
+    //Draws CreditScreen, removes Play Button
     public static void CreditSreen() {
 
         Play.setVisible(false);
@@ -94,6 +108,7 @@ public class App extends JFrame {
         Title.setSize(350, 325);
     }
 
+    //String arrays for questions and answers
     public static void Question() {
 
         String[] Questions = {"Qustion 1: Yes or No", "Qustion 2: No or Yes", "Question 3: CHEESSE"};
@@ -101,7 +116,7 @@ public class App extends JFrame {
         String[] Button2Text = {"B: No", "B: Yes", "B: CHEESSE"};
         String[] Button3Text = {"", "", "CHEESSE"};
         String[] Button4Text = {"", "", "CHEESSE"};
-
+        
         Title.setLocation(710, 250);
 
         if (Button3Text[QuestionLevel] == "")
